@@ -17,10 +17,10 @@ public class SpawnEnemy : MonoBehaviour {
     private float _delayTime = 0.0f;
     private float _spawnTime;
 
-    private List<GameObject> _enemyRoster = new List<GameObject>();
+    private List<GameObject> _enemyRoster = new List<GameObject>(); //List of enemy game objects
 
-    private Vector3 _spawnCoordinate1 = new Vector3(-14, 10, 3);
-    private Vector3 _spawnCoordinate2 = new Vector3(-13, 10, 4);
+    private Vector3 _spawnCoordinate1 = new Vector3(-14, 10, 3); //Left spawn location
+    private Vector3 _spawnCoordinate2 = new Vector3(-13, 10, 4); //Right Spawn location
 
     // Use this for initialization
     void Start () {
@@ -36,10 +36,11 @@ public class SpawnEnemy : MonoBehaviour {
 	}
 	
     /// <summary>
-    /// 
+    /// Generates a random number to determine if the enemy object will spawn at either left or right location
     /// </summary>
     private void SpawnEnemyObject()
     {
+        //Only spawn a new enemy object when the number currently spawned are less than max number of enemy spawnable
         if (_enemyCount < _maxEnemyCount)
         {
             int rndVal = (int)Random.Range(1, 1000);
@@ -75,7 +76,7 @@ public class SpawnEnemy : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Destroy all enemies generated
     /// </summary>
     public void DestoryAllEnemies()
     {

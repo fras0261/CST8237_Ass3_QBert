@@ -8,10 +8,10 @@ public class CreateStage : MonoBehaviour {
     public GameObject elevatorPlatform;
 
     private Vector3 _startCoordinate = new Vector3(-14, -2, -2);
-    private Vector3 _elevatorCoordinate1 = new Vector3(-15, 0.35f, -1);
-    private Vector3 _elevatorCoordinate2 = new Vector3(-9, 0.35f, 5);
+    private Vector3 _elevatorCoordinate1 = new Vector3(-15, 0.35f, -1); //Spawn coordinate of the left elevator
+    private Vector3 _elevatorCoordinate2 = new Vector3(-9, 0.35f, 5); //Spawn coordinate of the right elevator
 
-    private const float SURFACE_PANEL_HEIGHT = 0.501f;
+    private const float SURFACE_PANEL_HEIGHT = 0.501f; //Distance above the platforms the panels should spawn
     private const int NUM_OF_FLOORS = 7;
     private const int PLATFORMS_PER_FLOOR = 7;
 
@@ -21,7 +21,7 @@ public class CreateStage : MonoBehaviour {
 	}
 	
     /// <summary>
-    /// 
+    /// Generates the stage level by level in the shape of a pyramid
     /// </summary>
     private void GenerateStage()
     {
@@ -50,7 +50,7 @@ public class CreateStage : MonoBehaviour {
             }
             platformsCounter--;
             platformPositionCounter++;
-
+            
             nextPlatformCoordinate = _startCoordinate;
             nextPlatformCoordinate.y += platformPositionCounter;
             nextPlatformCoordinate.z += platformPositionCounter;
@@ -60,6 +60,7 @@ public class CreateStage : MonoBehaviour {
             
         }
 
+        //Create the elevator platforms
         Instantiate(elevatorPlatform, _elevatorCoordinate1, Quaternion.identity);
         Instantiate(elevatorPlatform, _elevatorCoordinate2, Quaternion.identity);
 

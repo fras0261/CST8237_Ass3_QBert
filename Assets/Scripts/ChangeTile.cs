@@ -24,8 +24,10 @@ public class ChangeTile : MonoBehaviour {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         gameController.SetNumColorChangesPerLevel(_maxColorChangesOnLevel);
 	}
-	
-    //Create an array of colors to cycle through
+
+    /// <summary>
+    /// Create an array of colors to cycle through
+    /// </summary>
     void CreateColorPalet()
     {
         _colourPalette[0] = Color.red;
@@ -36,6 +38,10 @@ public class ChangeTile : MonoBehaviour {
         _colourPalette[5] = new Color(1, 0, 1);
     }
 
+    /// <summary>
+    /// Whent the player lands on a tile whose colour can still be changed then the tile's colour will change to the next colour in the colour palette.
+    /// </summary>
+    /// <param name="obj"></param>
     void OnTriggerEnter(Collider obj)
     {
         if (obj.CompareTag("Player") && _changeCount < _maxColorChangesOnLevel )

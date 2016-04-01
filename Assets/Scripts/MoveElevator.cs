@@ -15,6 +15,9 @@ public class MoveElevator : MonoBehaviour {
         elevatorAnimator = gameObject.GetComponent<Animator>();
 	}
 
+    /// <summary>
+    /// Activates the appropriate animation depending on which elevator was landed on by the player
+    /// </summary>
     public void AnimateElevator()
     {
         if (transform.position.x == _leftElevatorX)

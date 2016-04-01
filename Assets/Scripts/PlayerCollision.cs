@@ -7,7 +7,7 @@ public class PlayerCollision : MonoBehaviour {
     private int _rightElevatorX = -9;
 
     /// <summary>
-    /// 
+    /// When the parent player collides with the elevators call for the elevator and player to animate
     /// </summary>
     /// <param name="col"></param>
     void OnCollisionEnter(Collision col)

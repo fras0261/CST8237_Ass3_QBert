@@ -8,7 +8,6 @@ public class MovePlayer : MonoBehaviour {
     Transform playerParent;
     AudioSource _audio;
     
-
     public GameController gameController;
     public AudioClip jumpAudio;
     public AudioClip fallAudio;
@@ -30,15 +29,16 @@ public class MovePlayer : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Controls the player movement based on the input of the from the arrow keys
     /// </summary>
     private void PlayerTileMovement()
     {
+        //Inputs are not taken while the player is in motion
         if (_inMotion == false)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                _inMotion = true;
+                _inMotion = true; 
                 playerAnimator.SetInteger("MovementDirection", 1);
                 StartCoroutine(WaitForInputAnimationCompletion(northEastMovement));
                 
@@ -67,48 +67,48 @@ public class MovePlayer : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Waits for the movement animation to complete before moving the parent 
     /// </summary>
-    /// <param name="movementDirection"></param>
+    /// <param name="movementDirection">A Vector3 containing the values for parent translation</param>
     /// <returns></returns>
     private IEnumerator WaitForInputAnimationCompletion(Vector3 movementDirection)
     {
         _audio.PlayOneShot(jumpAudio, 0.50f);
         yield return new WaitForSeconds(0.533f);
-        playerParent.transform.Translate(movementDirection);
-        transform.localPosition = Vector3.zero;
+        playerParent.transform.Translate(movementDirection); 
+        transform.localPosition = Vector3.zero; //Reset to the parent location
 
-        playerAnimator.SetInteger("MovementDirection", 0);
+        playerAnimator.SetInteger("MovementDirection", 0); //Return to idle animation
         _inMotion = false;
     }
 
     /// <summary>
-    /// 
+    /// System waits for the elevator animation to complete
     /// </summary>
     /// <returns></returns>
     private IEnumerator WaitForElevatorAnimationCompletion()
     {
         yield return new WaitForSeconds(1.0f);
         playerParent.transform.position = startCoordinates;
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = Vector3.zero; //Reset to the parent location
 
-        playerAnimator.SetInteger("MovementDirection", 0);
+        playerAnimator.SetInteger("MovementDirection", 0); //Return to idle animation
         _inMotion = false;
     }
 
     /// <summary>
-    /// 
+    /// Checks which elevator the player lands on animates the appropriate motion
     /// </summary>
     /// <param name="elevatorSide"></param>
     public void MovePlayerWithElevator(string elevatorSide)
     {        
-        if (elevatorSide.Equals("left"))
+        if (elevatorSide.Equals("left")) //If the player lands on the left elevator
         {
             _inMotion = true;
             playerAnimator.SetInteger("MovementDirection", 5);
             StartCoroutine(WaitForElevatorAnimationCompletion());
         }
-        else if (elevatorSide.Equals("right"))
+        else if (elevatorSide.Equals("right")) //If the player lands on the right elevator
         {
             _inMotion = true;
             playerAnimator.SetInteger("MovementDirection", 6);

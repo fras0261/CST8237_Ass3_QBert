@@ -41,15 +41,15 @@ public class MoveEnemy : MonoBehaviour {
 	}
 
     /// <summary>
-    /// 
+    /// Moves the enemy object towards the player
     /// </summary>
     public void EnemyTileMovement()
     {
         if (_inMotion == false)
         {
             _playerCurrentPosition.position = _playerPosition.transform.position;
-            float xDif = Mathf.Abs(this.transform.position.x - _playerCurrentPosition.transform.position.x);
-            float zDif = Mathf.Abs(this.transform.position.z - _playerCurrentPosition.transform.position.z);
+            float xDif = Mathf.Abs(this.transform.position.x - _playerCurrentPosition.transform.position.x); //Get the distance between the player and enemy object on the x axis
+            float zDif = Mathf.Abs(this.transform.position.z - _playerCurrentPosition.transform.position.z); //Get the distance between the player and enemy object on the z axis
 
             //If there is a smaller distance between the player and the enemy on the x Axis then the enemy will move to the southeast
             if (xDif > zDif)
@@ -87,7 +87,7 @@ public class MoveEnemy : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Waits for the animation to complete before returning to idle
     /// </summary>
     /// <param name="movementDirection"></param>
     /// <returns></returns>
@@ -96,9 +96,9 @@ public class MoveEnemy : MonoBehaviour {
         _audio.PlayOneShot(jumpAudio, 0.5f);
         yield return new WaitForSeconds(0.533f);
         enemyParent.transform.Translate(movementDirection);
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = Vector3.zero; //Reset postion to the zero
 
-        enemyAnimator.SetInteger("MovementDirection", 0);
+        enemyAnimator.SetInteger("MovementDirection", 0); //Return to idle
         _inMotion = false;
     }
 
@@ -116,7 +116,6 @@ public class MoveEnemy : MonoBehaviour {
 
         if (obj.CompareTag("PlayerHead"))
         {
-
             spawnEnemy.DestoryAllEnemies();
         }
     }
